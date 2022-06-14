@@ -35,3 +35,20 @@ test("Snake' getHeadCoordinate should return the coordinate of the first segment
   expect(snake.getHeadCoordinate().x).toBe(10);
   expect(snake.getHeadCoordinate().y).toBe(2);
 });
+
+test("Snake should be able to move by a coordinate", () => {
+  const snake = new Snake();
+  snake.move(new Coordinate(1, 0));
+  const snakeCoord = snake.getHeadCoordinate();
+  const assumedCoord = new Coordinate(11, 2);
+
+  expect(snakeCoord.equal(assumedCoord)).toBeTruthy();
+});
+
+test("Snake should be able to move only by a coordinate of (0, 1) or (1, 0)", () => {
+  const snake = new Snake();
+  
+  expect(() => {
+    snake.move(new Coordinate(2, 3));
+  }).toThrow("Invalid coordinate, sum of coordinate must be 1");
+});
