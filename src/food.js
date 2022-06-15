@@ -4,9 +4,17 @@ import { Coordinate } from "./coordinate";
 export class Food {
     #coordinate;
 
-    constructor()
+    constructor(x, y)
     {
-        this.respawn();
+        if (x !== undefined && y !== undefined)
+        {
+            this.#coordinate = new Coordinate(x, y);
+            return;
+        }
+        
+        do {
+            this.respawn();
+        } while (this.#coordinate.x === 10 && this.#coordinate.y <= 2);
     }
 
     #getRandomArbitrary(min, max) {
@@ -27,7 +35,7 @@ export class Food {
 
     isEaten(coord)
     {
-        return (this.#coordinate.x === coord.x && this.#coordinate.y === coord.y);
+        return (this.#coordinate.equal(coord));
     }
 
     static isFood(obj)
