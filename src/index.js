@@ -5,8 +5,8 @@ const playBtn = document.querySelector('.play-btn');
 playBtn.addEventListener('click', () => {
     if (!isGameStarted())
     {
-        startGame();
         playBtn.setAttribute('disabled', 'true');
+        startGame();
         (() => {
             try {
                 main();
