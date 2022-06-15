@@ -18,7 +18,7 @@ export class Snake {
             throw new Error("Invalid coordinate, sum of coordinate must be 1")
         }
 
-        for (let i = this.segments.length - 1; i > 1; --i)
+        for (let i = this.segments.length - 1; i > 0; --i)
         {
             this.segments[i].follow(this.segments[i-1]);
         }
@@ -84,7 +84,9 @@ class Segment {
         {
             throw new Error("Argument passed is not an instance of class - Segment");
         }
-        this.#coordinate = segment.coordinate;
+        let segmentCoord = segment.getCoordinate();
+        
+        this.#coordinate = new Coordinate(segmentCoord.x, segmentCoord.y);
     }
 
     setCoordinate(coord)
