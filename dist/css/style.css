@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&display=swap');
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #E9E9E9;
+}
+
+*, *::after, *::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    font-family: 'Comfortaa', cursive;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(125, 116, 116, 1);
+}
+
+.page-title {
+    margin: 20px 0;
+    font-size: 24px;
+    background: linear-gradient(180deg, #A2EB6A 34.9%, rgba(158, 220, 110, 0) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    margin-top: 20px;
+}
+
+.btn-group > button {
+    border-radius: 8px;
+    border: none;
+    padding: 10px 2rem;
+    transition: padding 100ms ease-in;
+}
+
+.btn-group > button:hover {
+    padding: 12px 2.1rem;
+}
+
+.play-btn {
+    background-color: #BAF297;
+}
+
+.reset-btn {
+    color: white;
+    background-color: #544F4F;
+}
+
+.board {
+    margin: 10px auto;
+    background-color: #ded8d8;
+    width: 400px;
+    height: 400px;
+
+    display: grid;
+    grid-template-columns: repeat(20, 20px);
+    grid-template-rows: repeat(20, 20px);
+    
+}
+
+.cell {
+    margin: 1px;
+    background-color: white;
+}
+
+.food {
+    background-color: rgb(123, 116, 33);
+}
+
+.segment {
+    background-color: darkgreen;
+}
