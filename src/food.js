@@ -4,20 +4,19 @@ import { Coordinate } from "./coordinate";
 export class Food {
     #coordinate;
 
-    constructor(x, y)
+    constructor()
     {
-        this.#coordinate = new Coordinate(+x, +y);
+        this.respawn();
     }
 
     #getRandomArbitrary(min, max) {
-        return Math.random() * (max - min) + min;
+        return Math.round(Math.random() * (max - min) + min);
     }
 
     respawn()
     {
         let x = this.#getRandomArbitrary(0, Board.CELL_PER_WIDTH - 1);
-        let y = this.#getRandomArbitrary(0, Board.CELL_PER_HEIGHT);
-
+        let y = this.#getRandomArbitrary(0, Board.CELL_PER_HEIGHT - 1);
         this.#coordinate = new Coordinate(x, y);
     }
 
