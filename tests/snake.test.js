@@ -1,4 +1,5 @@
 import { Coordinate } from "../src/coordinate";
+import { Food } from "../src/food";
 import { Snake } from "../src/snake";
 
 test("Snake should be able to grow", () => {
@@ -14,6 +15,12 @@ test("Snake' checkForCollision method should return true when snake head collide
   snake.segments[0].setCoordinate(new Coordinate(10, 10));
 
   expect(snake.checkForCollision(snake.getHeadCoordinate())).toBeTruthy();
+});
+
+test("Snake object should be able to determine if a food object is at the same coord as any of its segments other than its head", () => {
+  const snake = new Snake();
+  const food = new Food(10, 1);
+  expect(snake.checkForCollision(food.getCoordinate())).toBeTruthy();
 });
 
 test("Snake' isAtBoundary method should return true when snake collides with wall", () => {

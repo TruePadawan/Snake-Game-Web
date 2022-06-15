@@ -1,6 +1,5 @@
 import { Coordinate } from "../src/coordinate";
 import { Food } from "../src/food";
-import { Snake } from "../src/snake";
 
 test("Food object can respawn, which should change its coordinate", () => {
     const food = new Food();
