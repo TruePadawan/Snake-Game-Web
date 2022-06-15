@@ -9,14 +9,27 @@ const snake = new Snake();
 const food = new Food();
 const delta_coordinate = new Coordinate(0, 1);
 
+export function init()
+{
+  try {
+    Board.drawBoard(board);
+    Board.drawFood(food);
+    Board.drawSnake(snake);
+  }
+  catch (err)
+  {
+    console.log(err.message);
+  }
+}
+
 export function updateGameModels()
 {
+  snake.move(delta_coordinate);
+  
   if (snake.isAtBoundary())
   {
     setGameOver();
   }
-
-  snake.move(delta_coordinate);
 }
 
 export function composeFrame()
