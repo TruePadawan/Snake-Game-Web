@@ -3,6 +3,7 @@ let gameOver = false;
 
 export const setGameOver = (callback) => {
     gameOver = true;
+    document.querySelector(".game-over").classList.toggle("true");
     if (callback !== undefined)
     {
         callback();
