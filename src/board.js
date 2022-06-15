@@ -8,15 +8,24 @@ export class Board {
 
     static drawBoard(container)
     {
-        for (let i = 0; i <this.CELL_PER_WIDTH; ++i)
+        for (let y = 0; y < this.CELL_PER_HEIGHT; ++y)
         {
-            for (let j = 0; j < this.CELL_PER_HEIGHT; ++j)
+            for (let x = 0; x < this.CELL_PER_WIDTH; ++x)
             {
                 let node = document.createElement('div');
-                node.className = `cell-${i}-${j}`;
+                node.className = `cell coord-${x}-${y}`;
                 container.appendChild(node);
             }
         }
+    }
+
+    static clearBoard(container)
+    {
+        container.childNodes.forEach(node => {
+            node.classList.remove("food");
+            node.classList.remove("segment");
+            node.classList.remove("head");
+        });
     }
 
     static drawSnake(snake)
@@ -27,16 +36,20 @@ export class Board {
         }
 
         const snakeSegments = snake.segments;
-        snakeSegments.forEach((segment) => {
-            this.drawSegment(segment);
+        snakeSegments.forEach((segment, index) => {
+            this.drawSegment(segment, index);
         });
     }
 
-    static drawSegment(segment)
+    static drawSegment(segment, index)
     {
         let coord = segment.getCoordinate();
-        const cell = document.querySelector(`.cell-${coord.x}-${coord.y}`);
+        const cell = document.querySelector(`.coord-${coord.x}-${coord.y}`);
         cell.classList.toggle("segment");
+        if (index === 0)
+        {
+            cell.classList.toggle("head");
+        }
     }
 
     static drawFood(food)
@@ -48,7 +61,7 @@ export class Board {
         
         let coord = food.getCoordinate();
 
-        const cell = document.querySelector(`.cell-${coord.x}-${coord.y}`);
+        const cell = document.querySelector(`.coord-${coord.x}-${coord.y}`);
         cell.classList.toggle("food");
     }
 }
