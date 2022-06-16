@@ -66,12 +66,12 @@ header {
 .board {
     margin: 10px auto;
     background-color: #0b0b0b;
-    width: 400px;
-    height: 400px;
+    width: max-content;
+    height: max-content;
 
     display: grid;
-    grid-template-columns: repeat(20, 20px);
-    grid-template-rows: repeat(20, 20px);
+    grid-template-columns: repeat(20, 30px);
+    grid-template-rows: repeat(20, 30px);
     
 }
 
