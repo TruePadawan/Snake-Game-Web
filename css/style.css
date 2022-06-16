@@ -81,11 +81,13 @@ header {
 }
 
 .food {
-    background-color: rgb(123, 116, 33);
+    background-image: url(../images/food.png);
+    background-size: contain;
 }
 
 .segment {
     background-color: lightgreen;
+    border-radius: 4px;
 }
 
 .head.segment {
