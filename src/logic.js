@@ -9,10 +9,10 @@ const snake = new Snake();
 const food = new Food();
 let delta_coordinate = new Coordinate(0, 1);
 
-const LEFT_KEY = 37;
-const RIGHT_KEY = 39;
-const UP_KEY = 38;
-const DOWN_KEY = 40;
+const LEFT_KEY = "ArrowLeft";
+const RIGHT_KEY = "ArrowRight";
+const UP_KEY = "ArrowUp";
+const DOWN_KEY = "ArrowDown";
 
 export function init()
 {
@@ -21,7 +21,8 @@ export function init()
   Board.drawSnake(snake);
 
   document.addEventListener('keydown', (event) => {
-    const key = event.keyCode;
+    const key = event.key;
+    
     if (key === LEFT_KEY && delta_coordinate.x !== 1)
     {
       delta_coordinate = new Coordinate(-1, 0);
