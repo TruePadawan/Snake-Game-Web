@@ -14,6 +14,8 @@ const RIGHT_KEY = "ArrowRight";
 const UP_KEY = "ArrowUp";
 const DOWN_KEY = "ArrowDown";
 
+let moved;
+
 export function init()
 {
   Board.drawBoard(board);
@@ -23,6 +25,7 @@ export function init()
   document.addEventListener('keydown', (event) => {
     const key = event.key;
     
+    if (moved === false) return; // IF THE SNAKE HASN'T MOVED, DON'T TAKE A NEW INPUT
     if (key === LEFT_KEY && delta_coordinate.x !== 1)
     {
       delta_coordinate = new Coordinate(-1, 0);
@@ -39,7 +42,7 @@ export function init()
     {
       delta_coordinate = new Coordinate(1, 0);
     }
-
+    moved = false;
   });
 }
 
@@ -54,6 +57,7 @@ export function updateGameModels()
   }
   
   snake.move(delta_coordinate);
+  moved = true;
   if (snake.isAtBoundary() || snake.checkForCollision(snake.getHeadCoordinate())) {
     setGameOver();
   }
