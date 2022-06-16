@@ -2,7 +2,7 @@ import { Board } from "./board";
 import { Food } from "./food";
 import { Snake } from "./snake";
 import { Coordinate } from "./coordinate";
-import { setGameOver } from "./global_data";
+import { getMillisecondPerMovement, setMillisecondPerMovement, setGameOver } from "./global_data";
 
 const board = document.querySelector(".board");
 const snake = new Snake();
@@ -54,6 +54,12 @@ export function updateGameModels()
     do {
       food.respawn();
     } while (snake.checkForCollision(food.getCoordinate()) || food.isEaten(snake.getHeadCoordinate()));
+
+    const currentMillisecondPerMovement = getMillisecondPerMovement();
+    if (currentMillisecondPerMovement > 50)
+    {
+      setMillisecondPerMovement(currentMillisecondPerMovement - 5);
+    }
   }
   
   snake.move(delta_coordinate);

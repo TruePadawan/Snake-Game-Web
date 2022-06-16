@@ -1,4 +1,4 @@
-import { isGameOver, isGameStarted, startGame } from "./global_data";
+import { isGameOver, isGameStarted, getMillisecondPerMovement, startGame } from "./global_data";
 import { composeFrame, init, updateGameModels } from "./logic";
 
 const playBtn = document.querySelector('.play-btn');
@@ -34,7 +34,7 @@ function main(timestamp) {
 
     let elapsedTime = timestamp - start;
 
-    if (elapsedTime >= 100)
+    if (elapsedTime >= getMillisecondPerMovement())
     {
         composeFrame();
         updateGameModels();

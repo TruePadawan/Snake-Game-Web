@@ -1,5 +1,6 @@
 let gameStarted = false;
 let gameOver = false;
+let MILLISECOND_PER_MOVEMENT = 100;
 
 export const setGameOver = (callback) => {
     gameOver = true;
@@ -16,3 +17,8 @@ export const startGame = () => {
 
 export const isGameStarted = () => gameStarted;
 export const isGameOver = () => gameOver;
+
+export const getMillisecondPerMovement = () => MILLISECOND_PER_MOVEMENT;
+export const setMillisecondPerMovement = (val) => {
+    MILLISECOND_PER_MOVEMENT = val;
+};
