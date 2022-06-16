@@ -2,9 +2,6 @@ import { Coordinate } from "./coordinate";
 import { Board } from "./board";
 
 export class Snake {
-    static #headColor = "green";
-    static #bodyColor = "yellow";
-
     constructor()
     {
         const snakeHead = new Segment(10, 2);
