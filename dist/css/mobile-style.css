@@ -1,0 +1,20 @@
+@media screen and (max-width: 960px){
+    .board {
+        grid-template-columns: repeat(20, 25px);
+        grid-template-rows: repeat(20, 25px);
+    }
+}
+
+@media screen and (max-width: 768px){
+    .board {
+        grid-template-columns: repeat(20, 20px);
+        grid-template-rows: repeat(20, 20px);
+    }
+}
+
+@media screen and (max-width: 450px){
+    .board {
+        grid-template-columns: repeat(20, 15px);
+        grid-template-rows: repeat(20, 15px);
+    }
+}
