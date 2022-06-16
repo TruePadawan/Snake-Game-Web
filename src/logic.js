@@ -2,7 +2,7 @@ import { Board } from "./board";
 import { Food } from "./food";
 import { Snake } from "./snake";
 import { Coordinate } from "./coordinate";
-import { getMillisecondPerMovement, setMillisecondPerMovement, setGameOver } from "./global_data";
+import { getMillisecondPerMovement, setMillisecondPerMovement, setGameOver, isGameStarted } from "./global_data";
 
 const board = document.querySelector(".board");
 const snake = new Snake();
@@ -13,8 +13,10 @@ const LEFT_KEY = "ArrowLeft";
 const RIGHT_KEY = "ArrowRight";
 const UP_KEY = "ArrowUp";
 const DOWN_KEY = "ArrowDown";
-
 let moved;
+
+let touchXstart, touchXend;
+let touchYstart, touchYend;
 
 export function init()
 {
@@ -22,6 +24,7 @@ export function init()
   Board.drawFood(food);
   Board.drawSnake(snake);
 
+  // KEYBOARD CONTROLS
   document.addEventListener('keydown', (event) => {
     const key = event.key;
     
@@ -43,6 +46,46 @@ export function init()
       delta_coordinate = new Coordinate(1, 0);
     }
     moved = false;
+  });
+
+  // TOUCHSCREEN CONTROLS
+  document.addEventListener('touchstart', (e) => {
+    touchXstart = e.changedTouches[0].screenX;
+    touchYstart = e.changedTouches[0].screenY;
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    touchXend = e.changedTouches[0].screenX;
+    touchYend = e.changedTouches[0].screenY;
+
+    const xDiff = touchXend - touchXstart;
+    const yDiff = touchYend - touchYstart;
+
+    if (Math.sqrt(xDiff * xDiff + yDiff * yDiff) < 22 || !isGameStarted()) return;
+
+    touchXstart = touchXend;
+    touchYstart = touchYend;
+
+    let swipeAngle = ((Math.atan2(yDiff, xDiff) / Math.PI) * 180 + 360) % 360;
+    if (swipeAngle >= 45 && swipeAngle < 135 && delta_coordinate.y !== -1)
+    {
+      delta_coordinate = new Coordinate(0, 1);
+    }
+    else if (swipeAngle >= 135 && swipeAngle < 225 && delta_coordinate.x !== 1)
+    {
+      delta_coordinate = new Coordinate(-1, 0)
+    }
+    else if (swipeAngle >=225 && swipeAngle < 315 && delta_coordinate.y !== 1)
+    {
+      delta_coordinate = new Coordinate(0, -1);
+    }
+    else if (swipeAngle >= 315 || swipeAngle < 45)
+    {
+      if (delta_coordinate.x !== -1)
+      {
+        delta_coordinate = new Coordinate(1, 0);
+      }
+    }
   });
 }
 
