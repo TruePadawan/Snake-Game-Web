@@ -7,14 +7,12 @@ playBtn.addEventListener('click', () => {
     {
         playBtn.setAttribute('disabled', 'true');
         startGame();
-        (() => {
-            try {
-                main();
-            }
-            catch (error) {
-                console.log(error.message);
-            }
-        })();
+        try {
+            window.requestAnimationFrame(main);
+        }
+        catch (error) {
+            console.log(error.message);
+        }
     }
 });
 
@@ -25,13 +23,23 @@ resetBtn.addEventListener('click', () => {
 
 init();
 
-function main() {
-    if (isGameOver()) return;
+let start;
 
-    setTimeout(() => {
+function main(timestamp) {
+    if (isGameOver()) return;
+    if (start === undefined)
+    {
+        start = timestamp;
+    }
+
+    let elapsedTime = timestamp - start;
+
+    if (elapsedTime >= 100)
+    {
         composeFrame();
         updateGameModels();
-
-        main();
-    }, 100);
+        start = timestamp;
+    }
+    window.requestAnimationFrame(main);
 }
+
