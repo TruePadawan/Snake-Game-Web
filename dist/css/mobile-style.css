@@ -3,6 +3,10 @@
         grid-template-columns: repeat(20, 25px);
         grid-template-rows: repeat(20, 25px);
     }
+
+    .scores {
+        width: 500px;
+    }
 }
 
 @media screen and (max-width: 768px){
@@ -10,11 +14,19 @@
         grid-template-columns: repeat(20, 20px);
         grid-template-rows: repeat(20, 20px);
     }
+
+    .scores {
+        width: 400px;
+    }
 }
 
 @media screen and (max-width: 450px){
     .board {
         grid-template-columns: repeat(20, 15px);
         grid-template-rows: repeat(20, 15px);
+    }
+
+    .scores {
+        width: 300px;
     }
 }

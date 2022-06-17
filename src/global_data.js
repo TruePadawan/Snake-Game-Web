@@ -22,3 +22,9 @@ export const getMillisecondPerMovement = () => MILLISECOND_PER_MOVEMENT;
 export const setMillisecondPerMovement = (val) => {
     MILLISECOND_PER_MOVEMENT = val;
 };
+
+export function setHighScore(score)
+{
+    window.localStorage.setItem("high-score", new String(score));
+    document.querySelector(".high-score > .score").textContent = score;
+}

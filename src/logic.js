@@ -2,12 +2,13 @@ import { Board } from "./board";
 import { Food } from "./food";
 import { Snake } from "./snake";
 import { Coordinate } from "./coordinate";
-import { getMillisecondPerMovement, setMillisecondPerMovement, setGameOver, isGameStarted } from "./global_data";
+import { setHighScore, getMillisecondPerMovement, setMillisecondPerMovement, setGameOver, isGameStarted } from "./global_data";
 
 const board = document.querySelector(".board");
 const snake = new Snake();
 const food = new Food();
 let delta_coordinate = new Coordinate(0, 1);
+let score = 0;
 
 const LEFT_KEY = "ArrowLeft";
 const RIGHT_KEY = "ArrowRight";
@@ -21,6 +22,16 @@ let touchYstart, touchYend;
 const foodEatedSound = new Audio("./sounds/snake-eat.wav");
 const gameOverSound = new Audio("./sounds/game-over.wav");
 
+function increaseScore()
+{
+  ++score;
+  const highScore = window.localStorage.getItem("high-score");
+  if (score > +highScore)
+  {
+    setHighScore(score);
+  }
+  document.querySelector(".current-score > .score").textContent = score;
+}
 export function init()
 {
   Board.drawBoard(board);
@@ -90,6 +101,15 @@ export function init()
       }
     }
   });
+
+  const highScore = window.localStorage.getItem("high-score");
+  if (highScore === null)
+  {
+    window.localStorage.setItem("high-score", "0");
+  }
+  else {
+    document.querySelector(".high-score > .score").textContent = highScore;
+  }
 }
 
 export function updateGameModels()
@@ -97,6 +117,7 @@ export function updateGameModels()
   if (food.isEaten(snake.getHeadCoordinate())) { // RESPAWN FOOD AT A PLACE NOT WHERE SNAKE IS
     snake.grow();
     foodEatedSound.play();
+    increaseScore();
 
     do {
       food.respawn();
