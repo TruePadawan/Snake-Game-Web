@@ -134,3 +134,15 @@ header {
 .game-over.true {
     display: block;
 }
+
+.scores {
+    width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.current-score, .high-score {
+    display: flex;
+    flex-direction: column;
+}
