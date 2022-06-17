@@ -18,6 +18,9 @@ let moved;
 let touchXstart, touchXend;
 let touchYstart, touchYend;
 
+const foodEatedSound = new Audio("./sounds/snake-eat.wav");
+const gameOverSound = new Audio("./sounds/game-over.wav");
+
 export function init()
 {
   Board.drawBoard(board);
@@ -93,6 +96,7 @@ export function updateGameModels()
 {
   if (food.isEaten(snake.getHeadCoordinate())) { // RESPAWN FOOD AT A PLACE NOT WHERE SNAKE IS
     snake.grow();
+    foodEatedSound.play();
 
     do {
       food.respawn();
@@ -109,6 +113,7 @@ export function updateGameModels()
   moved = true;
   if (snake.isAtBoundary() || snake.checkForCollision(snake.getHeadCoordinate())) {
     setGameOver();
+    gameOverSound.play();
   }
 }
 
