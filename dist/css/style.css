@@ -117,6 +117,7 @@ header {
 }
 
 .game-over {
+    z-index: 2;
     display: none;
     text-align: center;
     width: 100%;
